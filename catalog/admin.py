@@ -9,9 +9,12 @@ class AutorAdmin(admin.ModelAdmin):
     
 class LibroAdmin(admin.ModelAdmin):
     
-    list_display = ('titulo', 'editor', 'fecha_pub')
+    list_display = ('titulo', 'get_autor','editor', 'fecha_pub')
     list_filter =  ('fecha_pub',)
     date_hierarchy = 'fecha_pub'
+    ordering = ('-fecha_pub',)
+    #filter_vertical = ('autor',)
+    raw_id_fields = ('editor', 'autor', )
     
 admin.site.register(Autor, AutorAdmin)
 admin.site.register(Editor)
