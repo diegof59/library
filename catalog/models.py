@@ -33,6 +33,13 @@ class Libro(models.Model):
         return self.titulo +' '+ self.autor.__str__()
     
     def get_autor(self):
-        print(self.autor.all()[0])
-        return self.autor.all()[0]
+        
+        query_autors = self.autor.all()
+        autors = ''
+        for autor in query_autors:
+            autors += autor.__str__() +', '
+        #print(query_autors.len())
+        
+        return autors
+        
     get_autor.short_description = 'Autor'
