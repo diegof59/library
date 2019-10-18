@@ -77,13 +77,17 @@ WSGI_APPLICATION = 'library.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dj_library',
-        'USER': 'dj_admin',
-        'PASSWORD': '5995',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'dj_library',
+    #     'USER': 'dj_admin',
+    #     'PASSWORD': '5995',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432'
+    # }
 }
 
 AUTH_USER_MODEL = 'users.CustomUser'

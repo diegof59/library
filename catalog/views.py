@@ -4,15 +4,20 @@ from django.http import HttpResponse
 from .models import Libro
 
 def buscar_libro(request):
+
+    errors = []
+
     if 'query' in request.GET:
+        
         query = request.GET['query']
-        if query:
+
+        if not query:
+            errors.append('Introduce un término de búsqueda.')
+        elif len(query) >= 25:
+            errors.append('Introduce un término de búsqueda menor a 25 caracteres.')
+        else:
             libros = Libro.objects.filter(titulo__icontains = query)
             context = {'libros': libros, 'query': query}
             return render(request, 'catalog/libro_query.html', context)
-        else:
-            context = {'error': True}
-            return render(request, 'catalog/buscar_libro.html', context)
-        return HttpResponse(mensaje)
-    else:
-        return render(request, 'catalog/buscar_libro.html')
+    
+    return render(request, 'catalog/buscar_libro.html', {'errors': errors})
