@@ -21,5 +21,6 @@ from . import views as central_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('meta/', central_views.show_meta, name='meta'),
+    path('contactar/', central_views.contactar, name='contactar'),
     path('catalog/', include(('catalog.urls', 'catalog'), namespace='catalog')),
 ]

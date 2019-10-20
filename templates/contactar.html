@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <title>Contactar</title>
+</head>
+
+<body>
+  {% if errors %}
+    <ul>
+      {% for error in errors %}
+        <li style="color: red">{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  <h2>Contactar</h2>
+  <form action="" method="post">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <input type="submit" value="Enviar">
+  </form>
+</body>
+
+</html>

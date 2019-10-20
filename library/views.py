@@ -1,4 +1,8 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.core.mail import send_mail
+
+from .forms import ContactoForm
 
 def show_meta(request):
     
@@ -9,3 +13,22 @@ def show_meta(request):
     response = 'Browser: %s<br> Referer URL: %s<br>Path: %s<br> User IP: %s<br>'%(browser,ref_url,path,usr_ip)
     
     return HttpResponse(response)
+
+def contactar(request):
+
+    if request.method == 'POST':
+        form = ContactoForm(request.POST)
+
+        if form.is_valid():
+            datos = form.cleaned_data
+            send_mail(
+                datos['asunto'],
+                datos['mensaje'],
+                datos.get('email', 'no-mail@lib.co'),
+                ['contacto@lib.co']
+                )
+            return HttpResponseRedirect('')
+    else:
+        form = ContactoForm()
+
+    return render(request, 'contactar.html', {'form': form})
