@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 
 from .forms import ContactoForm
 
+# Muestra alguna info incluida en la request.
 def show_meta(request):
     
     browser = request.META.get('HTTP_USER_AGENT')
@@ -14,6 +15,7 @@ def show_meta(request):
     
     return HttpResponse(response)
 
+# Maneja el formulario de contacto para enviar un mensaje al staff de libreria.
 def contactar(request):
 
     if request.method == 'POST':
@@ -26,8 +28,8 @@ def contactar(request):
                 datos['mensaje'],
                 datos.get('email', 'no-mail@lib.co'),
                 ['contacto@lib.co']
-                )
-            return HttpResponseRedirect('')
+            )
+            return HttpResponseRedirect('/meta')
     else:
         form = ContactoForm()
 
