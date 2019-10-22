@@ -21,3 +21,13 @@ def buscar_libro(request):
             return render(request, 'catalog/libro_query.html', context)
     
     return render(request, 'catalog/buscar_libro.html', {'errors': errors})
+
+def listar(request, **kwargs):
+
+    modelo = kwargs['modelo']
+    lista = modelo.objects.all()
+    print(lista)
+    return render(
+                request, 'catalog/listar.html',
+                {'lista': lista, 'tipo_objeto': modelo._meta.verbose_name_plural.title()}
+            )
