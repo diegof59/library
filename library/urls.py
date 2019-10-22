@@ -24,3 +24,8 @@ urlpatterns = [
     path('contactar/', central_views.contactar, name='contactar'),
     path('catalog/', include(('catalog.urls', 'catalog'), namespace='catalog')),
 ]
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
