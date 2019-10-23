@@ -9,7 +9,7 @@
 <body>
   <ul>
   {% for obj in lista %}
-    <li>{{ obj }}</li>
+    <li>{{ obj.titulo }} - {{ obj.autor.all|join:", " }}</li>
   {% endfor %}
   </ul>
 </body>
