@@ -1,12 +1,14 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.core.mail import send_mail
+from django.urls import reverse_lazy
 
 from .forms import ContactoForm
 
-# Muestra alguna info incluida en la request.
+
 def show_meta(request):
-    
+    """Muestra alguna info incluida en la request."""
+
     browser = request.META.get('HTTP_USER_AGENT')
     ref_url = request.META.get('HTTP_REFERER')
     usr_ip = request.META.get('REMOTE_ADDR')
@@ -15,9 +17,9 @@ def show_meta(request):
     
     return HttpResponse(response)
 
-# Maneja el formulario de contacto para enviar un mensaje al staff de libreria.
-def contactar(request):
 
+def contactar(request):
+    """Maneja el formulario de contacto para enviar un mensaje al staff de libreria."""
     if request.method == 'POST':
         form = ContactoForm(request.POST)
 
@@ -29,7 +31,7 @@ def contactar(request):
                 datos.get('email', 'no-mail@lib.co'),
                 ['contacto@lib.co']
             )
-            return HttpResponseRedirect('/meta')
+            return HttpResponseRedirect(reverse_lazy('contactar'))
     else:
         form = ContactoForm()
 

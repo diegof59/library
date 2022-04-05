@@ -14,7 +14,7 @@ class LibroAdmin(admin.ModelAdmin):
     date_hierarchy = 'fecha_pub'
     ordering = ('-fecha_pub',)
     filter_horizontal = ('autor',)
-    raw_id_fields = ('editor',)
+    # raw_id_fields = ('editor',)
     
 admin.site.register(Autor, AutorAdmin)
 admin.site.register(Editor)
